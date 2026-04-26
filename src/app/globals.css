@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6efe9;
+  --background-2: #efe0ce;
+  --foreground: #241a14;
+  --surface: #f8f1e8;
+  --surface-2: #ead8c3;
+  --border: rgba(36, 26, 20, 0.18);
+  --accent: #8b5a2b;
+  --accent-glow: rgba(139, 90, 43, 0.28);
+  --card-bg: #fffaf4;
+  --font-geist-sans: var(--font-amiri), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Naskh Arabic", "Noto Kufi Arabic", sans-serif;
+  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:root[data-theme="brown"] {
+  --background: #140d0a;
+  --background-2: #201411;
+  --foreground: #faf1e6;
+  --surface: #1c120d;
+  --surface-2: #281a13;
+  --border: rgba(250, 241, 230, 0.18);
+  --accent: #c9a06a;
+  --accent-glow: rgba(201, 160, 106, 0.26);
+  --card-bg: #1f140f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: transparent;
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, var(--background) 0%, var(--background-2) 100%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+:root[data-theme="brown"]::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 15%, var(--accent) 85%, transparent 100%);
+  opacity: 0.5;
+  z-index: 1000;
+}
+
+:root[data-splash="1"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("/صور/2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -2;
+}
+
+:root[data-splash="1"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--background);
+  opacity: 0.88;
+  z-index: -1;
+}
+
+:root[data-splash="1"][data-theme="brown"] body::before {
+  background-image: url("/صور/1.png");
+}
+
+:root[data-splash="1"][data-theme="brown"] body::after {
+  opacity: 0.86;
+}
+
+@media (max-width: 640px) {
+  :root[data-splash="1"] body::before {
+    background-image: url("/صور/3.png");
+  }
+
+  :root[data-splash="1"][data-theme="brown"] body::before {
+    background-image: url("/صور/4.png");
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+  opacity: 0.4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.7;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(184, 134, 74, 0.25);
+  color: var(--foreground);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Focus visible styling */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Card styling */
+.card-islamic {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="brown"] .card-islamic {
+  background: var(--card-bg);
+  box-shadow: 0 4px 20px -1px rgba(0, 0, 0, 0.2);
+}
